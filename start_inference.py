@@ -5,6 +5,7 @@ from inference_pipelines.inference_pipeline_maker import make_inference_pipeline
 from glob import glob
 import argparse
 from predict_utils import ScanSegmentation
+import torch 
 
 parser = argparse.ArgumentParser(description='Inference models')
 parser.add_argument('--input_dir_path', default="G:/tooth_seg/main/all_datas/chl/3D_scans_per_patient_obj_files", type=str, help = "input directory path that contain obj files.")
