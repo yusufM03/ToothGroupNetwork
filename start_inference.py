@@ -31,7 +31,8 @@ for dir_path in [
     if os.path.basename(dir_path) in split_base_name_ls: 
         stl_path_ls += glob(os.path.join(dir_path,"*.obj"))
 
-pred_obj = ScanSegmentation(make_inference_pipeline(args.model_name, [args.checkpoint_path+".h5", args.checkpoint_path_bdl+".h5"]))
+device=torch.device('cpu')
+pred_obj = ScanSegmentation(make_inference_pipeline(args.model_name, [args.checkpoint_path+".h5", args.checkpoint_path_bdl+".h5"]).to(device))
 os.makedirs(args.save_path, exist_ok=True)
 for i in range(len(stl_path_ls)):
     print(f"Processing: ", i,":",stl_path_ls[i])
