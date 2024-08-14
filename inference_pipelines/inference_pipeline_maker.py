@@ -18,10 +18,10 @@ def make_inference_pipeline(model_name, ckpt_path_ls):
             },
             "run_tooth_segmentation_module": True
         }
-
+        device=torch.device('cpu')
         module = TSegNetModule(inference_config)
         module.load_state_dict(torch.load(ckpt_path_ls[0]))
-        module.cuda()
+        module.to(device)
         return InferencePipeLine(module)
     elif model_name=="tgnet":
         from inference_pipelines.inference_pipeline_tgn import InferencePipeLine
