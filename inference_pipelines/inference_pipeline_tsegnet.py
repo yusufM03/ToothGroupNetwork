@@ -46,7 +46,21 @@ class InferencePipeLine:
         center_points = np.array(center_points)
         center_points = center_points[None,:,:]
         #gu.print_3d(gu.np_to_pcd(moved_points,color=[0,1,0]), center_points[0])
+        print(center_points)
+        center_points_list = center_points.tolist()
+        moved_points_list = moved_points.tolist()
         
+        # Create a dictionary to store both center_points and moved_points
+        data = {
+            "center_points": center_points_list,
+            "moved_points": moved_points_list
+        }
+        
+        # Save to a JSON file
+        with open('/kaggle/working/ToothGroupNetwork/resultt/points_data.json', 'w') as json_file:
+            json.dump(data, json_file)
+        
+        print("Data saved to points_data.json")
         nn_crop_indexes = tu.get_nearest_neighbor_idx(gu.torch_to_numpy(l0_xyz.permute(0,2,1)), center_points, 3072)
 
         cropped_input_ls = tu.get_indexed_features(input_cuda_feats, nn_crop_indexes)
