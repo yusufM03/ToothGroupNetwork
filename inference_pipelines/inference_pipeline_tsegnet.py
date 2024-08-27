@@ -6,6 +6,7 @@ from sklearn.neighbors import KDTree
 import open3d as o3d
 from sklearn.cluster import DBSCAN
 
+import json
 class InferencePipeLine:
     def __init__(self, model):
         self.model = model
